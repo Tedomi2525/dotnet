@@ -1,0 +1,127 @@
+<Window x:Class="CLB_EVENT.CuaSoDangKy"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Đăng Ký Tài Khoản - CLB &amp; EVENT"
+        Height="650" Width="550"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Background="#F5F7FF">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="50,30">
+
+            <!-- Tiêu đề -->
+            <TextBlock Text="🎓 Tạo Tài Khoản Mới"
+                       FontSize="22" FontWeight="Bold"
+                       Foreground="#0D3B8C" Margin="0,0,0,5"/>
+            <TextBlock Text="Đăng ký để sử dụng hệ thống quản lý CLB &amp; Sự Kiện"
+                       FontSize="13" Foreground="#607D8B" Margin="0,0,0,25"/>
+
+            <!-- Thông báo lỗi/thành công -->
+            <Border x:Name="borderThongBao" CornerRadius="8" Padding="15,10"
+                    Margin="0,0,0,15" Visibility="Collapsed">
+                <TextBlock x:Name="tbThongBao" TextWrapping="Wrap" FontSize="13"/>
+            </Border>
+
+            <!-- Họ và tên -->
+            <TextBlock Text="Họ và tên *" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <TextBox x:Name="tbHoTen" BorderThickness="0"
+                         Padding="12,10" FontSize="14" Background="Transparent"/>
+            </Border>
+
+            <!-- Tên đăng nhập -->
+            <TextBlock Text="Tên đăng nhập *" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <TextBox x:Name="tbTenDangNhap" BorderThickness="0"
+                         Padding="12,10" FontSize="14" Background="Transparent"/>
+            </Border>
+
+            <!-- Email -->
+            <TextBlock Text="Email *" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <TextBox x:Name="tbEmail" BorderThickness="0"
+                         Padding="12,10" FontSize="14" Background="Transparent"/>
+            </Border>
+
+            <!-- Số điện thoại -->
+            <TextBlock Text="Số điện thoại" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <TextBox x:Name="tbSoDienThoai" BorderThickness="0"
+                         Padding="12,10" FontSize="14" Background="Transparent"/>
+            </Border>
+
+            <!-- Lớp học -->
+            <TextBlock Text="Lớp học" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <TextBox x:Name="tbLopHoc" BorderThickness="0"
+                         Padding="12,10" FontSize="14" Background="Transparent"/>
+            </Border>
+
+            <!-- Mật khẩu -->
+            <TextBlock Text="Mật khẩu * (ít nhất 8 ký tự, có chữ hoa và số)"
+                       FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,15">
+                <PasswordBox x:Name="pbMatKhau" BorderThickness="0"
+                             Padding="12,10" FontSize="14" Background="Transparent"
+                             PasswordChar="●"/>
+            </Border>
+
+            <!-- Xác nhận mật khẩu -->
+            <TextBlock Text="Xác nhận mật khẩu *" FontSize="13" FontWeight="SemiBold"
+                       Foreground="#37474F" Margin="0,0,0,6"/>
+            <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                    Background="White" Margin="0,0,0,25">
+                <PasswordBox x:Name="pbXacNhanMatKhau" BorderThickness="0"
+                             Padding="12,10" FontSize="14" Background="Transparent"
+                             PasswordChar="●"/>
+            </Border>
+
+            <!-- Nút Đăng Ký -->
+            <Button x:Name="nutDangKy"
+                    Content="ĐĂNG KÝ TÀI KHOẢN"
+                    Height="46" FontSize="15" FontWeight="Bold"
+                    Foreground="White" BorderThickness="0"
+                    Cursor="Hand" Margin="0,0,0,15"
+                    Click="NutDangKy_Click">
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="vienNut" CornerRadius="10">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#1565C0" Offset="0"/>
+                                    <GradientStop Color="#1976D2" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="vienNut" Property="Background" Value="#0D47A1"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- Nút quay lại đăng nhập -->
+            <Button Content="Đã có tài khoản? Đăng nhập"
+                    Background="Transparent" BorderThickness="0"
+                    Foreground="#1565C0" FontSize="13"
+                    Cursor="Hand" Click="NutQuayLai_Click"/>
+
+        </StackPanel>
+    </ScrollViewer>
+</Window>

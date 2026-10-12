@@ -1,0 +1,381 @@
+<UserControl x:Class="CLB_EVENT.TrangChu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Background="#F0F2F5">
+        <StackPanel Margin="25,20">
+
+            <!-- ===== BANNER CHÀO MỪNG ===== -->
+            <Border CornerRadius="12" Margin="0,0,0,22" Height="130">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                        <GradientStop Color="#1565C0" Offset="0"/>
+                        <GradientStop Color="#283593" Offset="0.6"/>
+                        <GradientStop Color="#1A237E" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Grid Margin="30,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Lời chào và tên người dùng -->
+                    <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                        <TextBlock x:Name="tbLoiChao" Text="Chào buổi sáng,"
+                                   Foreground="#BBDEFB" FontSize="14"/>
+                        <TextBlock x:Name="tbTenNguoiDung" Text="Người dùng"
+                                   Foreground="White" FontSize="28"
+                                   FontWeight="Bold" Margin="0,2,0,5"/>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="📅 " FontSize="13" Foreground="#90CAF9"/>
+                            <TextBlock x:Name="tbNgayHomNay" Text=""
+                                       Foreground="#90CAF9" FontSize="13"/>
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- Biểu tượng trang chủ -->
+                    <Border Grid.Column="1" Width="70" Height="70"
+                            CornerRadius="35" Background="#1976D2"
+                            Opacity="0.8" VerticalAlignment="Center">
+                        <TextBlock Text="🎓" FontSize="36"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+                    </Border>
+                </Grid>
+            </Border>
+
+            <!-- ===== 4 THẺ CHỨC NĂNG NHANH ===== -->
+            <Grid Margin="0,0,0,22">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Thẻ 1: Đăng ký sự kiện -->
+                <Border Grid.Column="0" CornerRadius="12" Margin="0,0,8,0"
+                        Height="100" Cursor="Hand"
+                        MouseLeftButtonDown="TheChucNang_Click" Tag="DangKySuKien">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1565C0" Offset="0"/>
+                            <GradientStop Color="#1976D2" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="📝" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text="ĐĂNG KÝ SỰ KIỆN" Foreground="White"
+                                   FontSize="11" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Thẻ 2: Lịch sự kiện -->
+                <Border Grid.Column="1" CornerRadius="12" Margin="4,0,4,0"
+                        Height="100" Cursor="Hand"
+                        MouseLeftButtonDown="TheChucNang_Click" Tag="ThoiGianSuKien">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#E65100" Offset="0"/>
+                            <GradientStop Color="#F57C00" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="📅" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text="LỊCH SỰ KIỆN" Foreground="White"
+                                   FontSize="11" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Thẻ 3: Tin tức -->
+                <Border Grid.Column="2" CornerRadius="12" Margin="4,0,4,0"
+                        Height="100" Cursor="Hand"
+                        MouseLeftButtonDown="TheChucNang_Click" Tag="TinTuc">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1B5E20" Offset="0"/>
+                            <GradientStop Color="#2E7D32" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="📰" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text="TIN TỨC" Foreground="White"
+                                   FontSize="11" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Thẻ 4: Đăng ký CLB -->
+                <Border Grid.Column="3" CornerRadius="12" Margin="8,0,0,0"
+                        Height="100" Cursor="Hand"
+                        MouseLeftButtonDown="TheChucNang_Click" Tag="DangKyCLB">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#880E4F" Offset="0"/>
+                            <GradientStop Color="#C2185B" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="🎯" FontSize="28" HorizontalAlignment="Center"/>
+                        <TextBlock Text="ĐĂNG KÝ CLB" Foreground="White"
+                                   FontSize="11" FontWeight="Bold"
+                                   HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- ===== HAI CỘT NỘI DUNG ===== -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- CỘT TRÁI: Tin nhà trường / CLB -->
+                <StackPanel Grid.Column="0">
+
+                    <!-- Tin CLB -->
+                    <Border Background="White" CornerRadius="10" Margin="0,0,0,15">
+                        <StackPanel>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                        <Border Width="4" Height="20" CornerRadius="2"
+                                                Background="#1565C0" Margin="0,0,10,0"/>
+                                        <TextBlock Text="TIN CLB &amp; SỰ KIỆN"
+                                                   FontWeight="Bold" FontSize="14"
+                                                   Foreground="#212121"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="Xem tất cả »"
+                                               Tag="TinTuc" MouseLeftButtonDown="TheChucNang_Click"
+                                               Foreground="#1565C0" FontSize="12"
+                                               Cursor="Hand" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Danh sách tin CLB -->
+                            <ItemsControl x:Name="dsTinCLB" Margin="0,0,0,5">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="18,12" Cursor="Hand" Tag="{Binding MaTinTuc}" MouseLeftButtonDown="TheTin_Click">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#F5F5F5"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="📌 " FontSize="12" Foreground="#1565C0"/>
+                                                    <TextBlock Text="{Binding TieuDe}"
+                                                               FontSize="13" Foreground="#212121"
+                                                               TextWrapping="Wrap" MaxWidth="380"/>
+                                                </StackPanel>
+                                                <TextBlock Text="{Binding NgayDangHienThi}"
+                                                           FontSize="11" Foreground="#9E9E9E"
+                                                           Margin="18,3,0,0"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Hoạt động sinh viên -->
+                    <Border Background="White" CornerRadius="10">
+                        <StackPanel>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                                <StackPanel Orientation="Horizontal">
+                                    <Border Width="4" Height="20" CornerRadius="2"
+                                            Background="#F57C00" Margin="0,0,10,0"/>
+                                    <TextBlock Text="HOẠT ĐỘNG CLB"
+                                               FontWeight="Bold" FontSize="14"
+                                               Foreground="#212121"/>
+                                </StackPanel>
+                            </Border>
+                            <ItemsControl x:Name="dsHoatDong">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="18,12" Cursor="Hand" Tag="{Binding MaTinTuc}" MouseLeftButtonDown="TheTin_Click">
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding TieuDe}" FontWeight="SemiBold" TextWrapping="Wrap"/>
+                                                <TextBlock Text="{Binding TomTat}" Foreground="#616161" Margin="0,6,0,0" TextWrapping="Wrap"/>
+                                            </StackPanel>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                            <Border x:Name="borderTrongHoatDong" Padding="20,30">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="📭" FontSize="36"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Chưa có hoạt động nào"
+                                               FontSize="13" Foreground="#9E9E9E"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,8,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- CỘT PHẢI: Sự kiện sắp tới -->
+                <StackPanel Grid.Column="2">
+
+                    <!-- Sự kiện sắp tới -->
+                    <Border Background="White" CornerRadius="10" Margin="0,0,0,15">
+                        <StackPanel>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                                        <Border Width="4" Height="20" CornerRadius="2"
+                                                Background="#F57C00" Margin="0,0,10,0"/>
+                                        <TextBlock Text="SỰ KIỆN SẮP TỚI"
+                                                   FontWeight="Bold" FontSize="14"
+                                                   Foreground="#212121"/>
+                                    </StackPanel>
+                                    <TextBlock Grid.Column="1" Text="Xem tất cả »"
+                                               Tag="ThoiGianSuKien" MouseLeftButtonDown="TheChucNang_Click"
+                                               Foreground="#1565C0" FontSize="12"
+                                               Cursor="Hand" VerticalAlignment="Center"/>
+                                </Grid>
+                            </Border>
+
+                            <!-- Danh sách sự kiện sắp tới -->
+                            <ItemsControl x:Name="dsSuKienSapToi" Margin="0,0,0,5">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border Padding="18,12" Cursor="Hand" Tag="DangKySuKien" MouseLeftButtonDown="TheChucNang_Click">
+                                            <Border.Style>
+                                                <Style TargetType="Border">
+                                                    <Style.Triggers>
+                                                        <Trigger Property="IsMouseOver" Value="True">
+                                                            <Setter Property="Background" Value="#F5F5F5"/>
+                                                        </Trigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </Border.Style>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="50"/>
+                                                    <ColumnDefinition Width="*"/>
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Ngày diễn ra -->
+                                                <Border Grid.Column="0" Background="#E3F2FD"
+                                                        CornerRadius="8" Width="46" Height="50">
+                                                    <StackPanel VerticalAlignment="Center"
+                                                                HorizontalAlignment="Center">
+                                                        <TextBlock Text="{Binding NgaySuKien}"
+                                                                   FontSize="18" FontWeight="Bold"
+                                                                   Foreground="#1565C0"
+                                                                   HorizontalAlignment="Center"/>
+                                                        <TextBlock Text="{Binding ThangSuKien}"
+                                                                   FontSize="11" Foreground="#1565C0"
+                                                                   HorizontalAlignment="Center"/>
+                                                    </StackPanel>
+                                                </Border>
+
+                                                <!-- Tên và thông tin sự kiện -->
+                                                <StackPanel Grid.Column="1" Margin="12,0,0,0"
+                                                            VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding TenSuKien}"
+                                                               FontSize="13" FontWeight="SemiBold"
+                                                               Foreground="#212121"
+                                                               TextWrapping="Wrap"/>
+                                                    <TextBlock Text="{Binding TenCLB}"
+                                                               FontSize="11" Foreground="#1565C0"
+                                                               Margin="0,3,0,0"/>
+                                                    <TextBlock Text="{Binding DiaDiem}"
+                                                               FontSize="11" Foreground="#9E9E9E"
+                                                               Margin="0,2,0,0"/>
+                                                </StackPanel>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+
+                            <!-- Hiển thị khi không có sự kiện -->
+                            <Border x:Name="thongBaoTrongSuKien" Padding="20,30">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="📭" FontSize="36"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Chưa có sự kiện sắp tới"
+                                               FontSize="13" Foreground="#9E9E9E"
+                                               HorizontalAlignment="Center"
+                                               Margin="0,8,0,0"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Thống kê nhanh -->
+                    <Border Background="White" CornerRadius="10">
+                        <Border Padding="18,15">
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                                <Border Width="4" Height="20" CornerRadius="2"
+                                        Background="#1565C0" Margin="0,0,10,0"/>
+                                <TextBlock Text="THỐNG KÊ CLB"
+                                           FontWeight="Bold" FontSize="14"
+                                           Foreground="#212121"/>
+                            </StackPanel>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Border Grid.Column="0" Background="#E3F2FD"
+                                        CornerRadius="8" Padding="15,12" Margin="0,0,5,0">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock x:Name="tbTongCLB" Text="0"
+                                                   FontSize="28" FontWeight="Bold"
+                                                   Foreground="#1565C0"
+                                                   HorizontalAlignment="Center"/>
+                                        <TextBlock Text="CLB Hoạt Động"
+                                                   FontSize="12" Foreground="#1565C0"
+                                                   HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Grid.Column="1" Background="#FFF3E0"
+                                        CornerRadius="8" Padding="15,12" Margin="5,0,0,0">
+                                    <StackPanel HorizontalAlignment="Center">
+                                        <TextBlock x:Name="tbTongSuKien" Text="0"
+                                                   FontSize="28" FontWeight="Bold"
+                                                   Foreground="#F57C00"
+                                                   HorizontalAlignment="Center"/>
+                                        <TextBlock Text="Sự Kiện Sắp Tới"
+                                                   FontSize="12" Foreground="#F57C00"
+                                                   HorizontalAlignment="Center"/>
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </StackPanel>
+                        </Border>
+                    </Border>
+                </StackPanel>
+            </Grid>
+
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

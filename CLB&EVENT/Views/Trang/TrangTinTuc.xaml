@@ -1,0 +1,46 @@
+<UserControl x:Class="CLB_EVENT.TrangTinTuc"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <UserControl.Resources>
+  <DataTemplate x:Key="MauTin">
+   <Button Tag="{Binding MaTinTuc}" Click="NutDocTin_Click" HorizontalContentAlignment="Stretch"
+           Background="White" BorderThickness="0" Padding="16" Margin="0,0,0,8" Cursor="Hand">
+    <StackPanel>
+     <TextBlock Text="{Binding TieuDe}" FontSize="15" FontWeight="SemiBold" TextWrapping="Wrap"/>
+     <TextBlock Text="{Binding TomTat}" Foreground="#616161" TextWrapping="Wrap" Margin="0,8,0,8"/>
+     <TextBlock Text="{Binding NgayDang, StringFormat={}{0:dd/MM/yyyy}}" Foreground="#757575" FontSize="12"/>
+    </StackPanel>
+   </Button>
+  </DataTemplate>
+ </UserControl.Resources>
+ <Grid Background="#F0F2F5">
+  <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="*"/></Grid.RowDefinitions>
+  <StackPanel Background="White" Margin="0" Grid.Row="0">
+   <TextBlock Text="Tin Tức &amp; Thông Báo" FontSize="20" FontWeight="Bold" Margin="25,15"/>
+   <WrapPanel Margin="25,0,25,12">
+    <TextBox x:Name="tbTimKiem" Width="240" Padding="8" Margin="0,0,10,0" ToolTip="Nhập từ khóa" KeyDown="TimKiem_KeyDown"/>
+    <TextBlock Text="Từ ngày" VerticalAlignment="Center" Margin="0,0,8,0"/>
+    <DatePicker x:Name="dpTuNgay" Language="vi-VN" Width="130" Margin="0,0,10,0"/>
+    <TextBlock Text="Đến ngày" VerticalAlignment="Center" Margin="0,0,8,0"/>
+    <DatePicker x:Name="dpDenNgay" Language="vi-VN" Width="130" Margin="0,0,10,0"/>
+    <Button Content="Tìm kiếm" Padding="12,8" Click="NutTimKiem_Click" Margin="0,0,8,0"/>
+    <Button Content="Xóa bộ lọc" Padding="12,8" Click="NutXoaLoc_Click"/>
+   </WrapPanel>
+   <WrapPanel Margin="25,0,25,15">
+    <RadioButton x:Name="rbToanBo" Content="Toàn bộ" GroupName="DanhMucTin" IsChecked="True" Checked="LocDanhMuc_Checked" Margin="0,0,16,0"/>
+    <RadioButton x:Name="rbThongBao" Content="Thông báo" GroupName="DanhMucTin" Checked="LocDanhMuc_Checked" Margin="0,0,16,0"/>
+    <RadioButton x:Name="rbSuKien" Content="Sự kiện" GroupName="DanhMucTin" Checked="LocDanhMuc_Checked" Margin="0,0,16,0"/>
+    <RadioButton x:Name="rbHoatDong" Content="Hoạt động sinh viên" GroupName="DanhMucTin" Checked="LocDanhMuc_Checked" Margin="0,0,16,0"/>
+    <RadioButton x:Name="rbCLB" Content="CLB" GroupName="DanhMucTin" Checked="LocDanhMuc_Checked"/>
+   </WrapPanel>
+   <TextBlock x:Name="tbKetQua" Margin="25,0,25,12" TextWrapping="Wrap" Foreground="#616161"/>
+  </StackPanel>
+  <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" Margin="25,15">
+   <Grid>
+    <Grid.ColumnDefinitions><ColumnDefinition Width="*"/><ColumnDefinition Width="16"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+    <ItemsControl x:Name="dsTinTrai" ItemTemplate="{StaticResource MauTin}"/>
+    <ItemsControl x:Name="dsTinPhai" Grid.Column="2" ItemTemplate="{StaticResource MauTin}"/>
+   </Grid>
+  </ScrollViewer>
+ </Grid>
+</UserControl>

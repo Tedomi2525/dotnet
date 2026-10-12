@@ -1,0 +1,5 @@
+.vs/
+**/bin/
+**/obj/
+**/aiven.local.secret
+*.user

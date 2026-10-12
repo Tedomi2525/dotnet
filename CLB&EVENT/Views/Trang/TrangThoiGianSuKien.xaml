@@ -1,0 +1,180 @@
+<UserControl x:Class="CLB_EVENT.TrangThoiGianSuKien"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#F0F2F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TIÊU ĐỀ -->
+        <Border Grid.Row="0" Background="White" Padding="25,15">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="4" ShadowDepth="1" Opacity="0.1" Direction="270"/>
+            </Border.Effect>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="📅" FontSize="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                <TextBlock Text="Thời Gian Sự Kiện" FontSize="18" FontWeight="Bold"
+                           Foreground="#212121" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <Grid Grid.Row="1" Margin="25,15,25,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="320"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- CỘT TRÁI: Lịch tháng -->
+            <StackPanel Grid.Column="0">
+
+                <!-- Widget lịch -->
+                <Border Background="White" CornerRadius="10" Margin="0,0,0,15">
+                    <StackPanel>
+                        <!-- Tiêu đề lịch -->
+                        <Border Padding="15,12">
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                    <GradientStop Color="#1565C0" Offset="0"/>
+                                    <GradientStop Color="#1976D2" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Border.Background>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <!-- Nút tháng trước -->
+                                <Button Grid.Column="0" Content="◀" Background="Transparent"
+                                        BorderThickness="0" Foreground="White"
+                                        FontSize="14" Cursor="Hand"
+                                        Click="NutThangTruoc_Click"/>
+
+                                <!-- Hiển thị tháng năm hiện tại -->
+                                <TextBlock Grid.Column="1" x:Name="tbThangNam"
+                                           Text="Tháng 1 / 2026"
+                                           Foreground="White" FontWeight="Bold"
+                                           FontSize="14" HorizontalAlignment="Center"
+                                           VerticalAlignment="Center"/>
+
+                                <!-- Nút tháng sau -->
+                                <Button Grid.Column="2" Content="▶" Background="Transparent"
+                                        BorderThickness="0" Foreground="White"
+                                        FontSize="14" Cursor="Hand"
+                                        Click="NutThangSau_Click"/>
+                            </Grid>
+                        </Border>
+
+                        <!-- Tiêu đề các ngày trong tuần -->
+                        <Grid Margin="10,10,10,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="CN" FontSize="11" FontWeight="Bold"
+                                       Foreground="#E53935" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="1" Text="T2" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="2" Text="T3" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="3" Text="T4" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="4" Text="T5" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="5" Text="T6" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                            <TextBlock Grid.Column="6" Text="T7" FontSize="11" FontWeight="Bold"
+                                       Foreground="#757575" HorizontalAlignment="Center"/>
+                        </Grid>
+
+                        <!-- Lưới ngày trong tháng (điền từ code) -->
+                        <Grid x:Name="luoiLich" Margin="10,0,10,10"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Thống kê sự kiện theo tháng -->
+                <Border Background="White" CornerRadius="10" Padding="18,15">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                            <Border Width="4" Height="18" CornerRadius="2"
+                                    Background="#F57C00" Margin="0,0,10,0"/>
+                            <TextBlock Text="THỐNG KÊ THÁNG NÀY"
+                                       FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Horizontal">
+                            <Border Background="#E3F2FD" CornerRadius="8"
+                                    Padding="15,12" Margin="0,0,8,0" Width="120">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="tbSoSuKienThang" Text="0"
+                                               FontSize="28" FontWeight="Bold"
+                                               Foreground="#1565C0"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Sự Kiện" FontSize="12"
+                                               Foreground="#1565C0"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+
+                            <Border Background="#FFF3E0" CornerRadius="8" Padding="15,12" Width="120">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock x:Name="tbSoSuKienConLai" Text="0"
+                                               FontSize="28" FontWeight="Bold"
+                                               Foreground="#F57C00"
+                                               HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Còn Lại" FontSize="12"
+                                               Foreground="#F57C00"
+                                               HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+
+            <!-- CỘT PHẢI: Danh sách sự kiện theo ngày/tháng -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề -->
+                <Border Grid.Row="0" Background="White" CornerRadius="10,10,0,0" Padding="18,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="4" Height="18" CornerRadius="2"
+                                    Background="#1565C0" Margin="0,0,10,0"/>
+                            <TextBlock x:Name="tbTieuDeDanhSach"
+                                       Text="TẤT CẢ SỰ KIỆN SẮP TỚI"
+                                       FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                        </StackPanel>
+                        <Button Grid.Column="1" Content="Xem tất cả"
+                                Background="Transparent" BorderThickness="0"
+                                Foreground="#1565C0" FontSize="12"
+                                Cursor="Hand" Click="NutXemTatCa_Click"/>
+                    </Grid>
+                </Border>
+
+                <!-- Danh sách sự kiện -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="panelSuKien" Background="#F0F2F5"/>
+                </ScrollViewer>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

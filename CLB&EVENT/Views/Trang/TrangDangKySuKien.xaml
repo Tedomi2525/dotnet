@@ -1,0 +1,287 @@
+<UserControl x:Class="CLB_EVENT.TrangDangKySuKien"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#F0F2F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ===== TIÊU ĐỀ TRANG ===== -->
+        <Border Grid.Row="0" Background="White" Padding="25,15">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="4" ShadowDepth="1" Opacity="0.1" Direction="270"/>
+            </Border.Effect>
+            <StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                    <TextBlock Text="📝" FontSize="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                    <TextBlock Text="Đăng Ký Sự Kiện" FontSize="18" FontWeight="Bold"
+                               Foreground="#212121" VerticalAlignment="Center"/>
+                </StackPanel>
+
+                <!-- Thanh tìm kiếm sự kiện -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="120"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="0" BorderBrush="#E0E0E0" BorderThickness="1"
+                            CornerRadius="6" Background="#F9F9F9" Margin="0,0,10,0">
+                        <StackPanel Orientation="Horizontal" Margin="12,8">
+                            <TextBlock Text="🔍 " Foreground="#757575" FontSize="13"/>
+                            <TextBox x:Name="tbTimKiem" BorderThickness="0"
+                                     Background="Transparent" FontSize="13"
+                                     VerticalAlignment="Center" Width="250"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Lọc theo CLB -->
+                    <Border Grid.Column="1" BorderBrush="#E0E0E0" BorderThickness="1"
+                            CornerRadius="6" Background="White" Margin="0,0,10,0">
+                        <ComboBox x:Name="cbLocCLB" BorderThickness="0"
+                                  Background="Transparent" Padding="10,8"
+                                  FontSize="13"
+                                  SelectionChanged="CbLocCLB_SelectionChanged"/>
+                    </Border>
+
+                    <Button Grid.Column="2" Content="🔍 Tìm kiếm"
+                            Background="#1565C0" Foreground="White"
+                            BorderThickness="0" FontSize="13"
+                            Cursor="Hand" Click="NutTimKiem_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#0D47A1"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <!-- ===== NỘI DUNG ===== -->
+        <Grid Grid.Row="1" Margin="25,15,25,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="380"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- CỘT TRÁI: Danh sách sự kiện -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề danh sách -->
+                <Border Grid.Row="0" Background="White" CornerRadius="10,10,0,0" Padding="18,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="4" Height="18" CornerRadius="2"
+                                    Background="#1565C0" Margin="0,0,10,0"/>
+                            <TextBlock Text="DANH SÁCH SỰ KIỆN SẮP TỚI"
+                                       FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" x:Name="tbSoSuKien"
+                                   Text="0 sự kiện" FontSize="12"
+                                   Foreground="#757575" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Danh sách sự kiện (có thể cuộn) -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="panelDanhSachSuKien">
+                        <!-- Được điền động từ code-behind -->
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- CỘT PHẢI: Form đăng ký và sự kiện đã đăng ký -->
+            <ScrollViewer Grid.Column="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+
+                <!-- Form đăng ký -->
+                <Border Background="White" CornerRadius="10" Margin="0,0,0,15">
+                    <StackPanel>
+                        <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="4" Height="18" CornerRadius="2"
+                                        Background="#F57C00" Margin="0,0,10,0"/>
+                                <TextBlock Text="THÔNG TIN ĐĂNG KÝ"
+                                           FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Padding="18,15">
+                        <StackPanel>
+
+                            <!-- Thông báo khi chưa chọn sự kiện -->
+                            <Border x:Name="borderChuaChon" Padding="20,30">
+                                <StackPanel HorizontalAlignment="Center">
+                                    <TextBlock Text="👆" FontSize="36" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="Chọn một sự kiện bên trái để đăng ký"
+                                               FontSize="13" Foreground="#9E9E9E"
+                                               HorizontalAlignment="Center"
+                                               TextAlignment="Center"
+                                               Margin="0,8,0,0" TextWrapping="Wrap"/>
+                                </StackPanel>
+                            </Border>
+
+                            <!-- Thông tin sự kiện được chọn -->
+                            <StackPanel x:Name="panelThongTinDangKy" Visibility="Collapsed">
+
+                                <TextBlock x:Name="tbTenSuKien" Text=""
+                                           FontSize="15" FontWeight="Bold"
+                                           Foreground="#1565C0" TextWrapping="Wrap"
+                                           Margin="0,0,0,10"/>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="📅 Thời gian:"
+                                               FontSize="12" Foreground="#757575" Width="90"/>
+                                    <TextBlock Grid.Column="1" x:Name="tbThoiGian" Text=""
+                                               FontSize="12" Foreground="#424242"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="📍 Địa điểm:"
+                                               FontSize="12" Foreground="#757575" Width="90"/>
+                                    <TextBlock Grid.Column="1" x:Name="tbDiaDiem" Text=""
+                                               FontSize="12" Foreground="#424242" TextWrapping="Wrap"/>
+                                </Grid>
+
+                                <Grid Margin="0,0,0,15">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Column="0" Text="🎯 CLB:"
+                                               FontSize="12" Foreground="#757575" Width="90"/>
+                                    <TextBlock Grid.Column="1" x:Name="tbTenCLB" Text=""
+                                               FontSize="12" Foreground="#424242"/>
+                                </Grid>
+
+                                <!-- Ghi chú thêm khi đăng ký -->
+                                <TextBlock Text="Ghi chú (không bắt buộc):"
+                                           FontSize="12" Foreground="#616161" Margin="0,0,0,6"/>
+                                <Border BorderBrush="#E0E0E0" BorderThickness="1"
+                                        CornerRadius="6" Margin="0,0,0,15">
+                                    <TextBox x:Name="tbGhiChu" BorderThickness="0"
+                                             Padding="10,8" FontSize="13"
+                                             Height="70" TextWrapping="Wrap"
+                                             AcceptsReturn="True"
+                                             VerticalScrollBarVisibility="Auto"/>
+                                </Border>
+
+                                <!-- Nút đăng ký -->
+                                <Button x:Name="nutDangKySuKien"
+                                        Content="✅ ĐĂNG KÝ THAM GIA"
+                                        Height="42" FontSize="13" FontWeight="Bold"
+                                        Foreground="White" BorderThickness="0"
+                                        Cursor="Hand" Margin="0,0,0,10"
+                                        Click="NutDangKySuKien_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border x:Name="vienNut" CornerRadius="8">
+                                                <Border.Background>
+                                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                        <GradientStop Color="#1565C0" Offset="0"/>
+                                                        <GradientStop Color="#1976D2" Offset="1"/>
+                                                    </LinearGradientBrush>
+                                                </Border.Background>
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="vienNut" Property="Background" Value="#0D47A1"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <!-- Thông báo kết quả đăng ký -->
+                                <Border x:Name="borderThongBaoDangKy" CornerRadius="6"
+                                        Padding="12,8" Visibility="Collapsed">
+                                    <TextBlock x:Name="tbThongBaoDangKy" FontSize="12"
+                                               TextWrapping="Wrap"/>
+                                </Border>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+                <!-- Sự kiện đã đăng ký -->
+                <Border Background="White" CornerRadius="10">
+                    <StackPanel>
+                        <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="4" Height="18" CornerRadius="2"
+                                        Background="#2E7D32" Margin="0,0,10,0"/>
+                                <TextBlock Text="SỰ KIỆN ĐÃ ĐĂNG KÝ"
+                                           FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                            </StackPanel>
+                        </Border>
+
+                        <ItemsControl x:Name="dsSuKienDaDangKy">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Border Padding="18,10">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding TenSuKien}"
+                                                       FontSize="13" Foreground="#212121"
+                                                       TextWrapping="Wrap"/>
+                                            <StackPanel Orientation="Horizontal" Margin="0,3,0,0">
+                                                <TextBlock Text="{Binding TrangThai}"
+                                                           FontSize="11" Foreground="#2E7D32"/>
+                                                <TextBlock Text=" · " FontSize="11" Foreground="#9E9E9E"/>
+                                                <TextBlock Text="{Binding NgayDangKy}"
+                                                           FontSize="11" Foreground="#9E9E9E"/>
+                                            </StackPanel>
+                                            <Button Content="Hủy đăng ký" Tag="{Binding MaDangKy}"
+                                                    IsEnabled="{Binding CoTheHuy}" Click="NutHuyDangKy_Click"
+                                                    HorizontalAlignment="Left" Padding="10,5" Margin="0,8,0,0"/>
+                                        </StackPanel>
+                                    </Border>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+
+                        <Border x:Name="borderTrongDangKy" Padding="20,25">
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="📭" FontSize="28" HorizontalAlignment="Center"/>
+                                <TextBlock Text="Chưa đăng ký sự kiện nào"
+                                           FontSize="12" Foreground="#9E9E9E"
+                                           HorizontalAlignment="Center" Margin="0,6,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Border>
+
+            </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</UserControl>

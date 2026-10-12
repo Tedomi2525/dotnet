@@ -1,0 +1,208 @@
+<Window x:Class="CLB_EVENT.CuaSoDangNhap"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Đăng Nhập - Hệ Thống Quản Lý CLB &amp; Sự Kiện"
+        Height="600" Width="950"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#1A1A2E">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ===== CỘT TRÁI: BANNER GIỚI THIỆU ===== -->
+        <Border Grid.Column="0">
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#0D3B8C" Offset="0"/>
+                    <GradientStop Color="#1565C0" Offset="0.5"/>
+                    <GradientStop Color="#0D3B8C" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+            <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Margin="40">
+
+                <!-- Logo -->
+                <Border Width="90" Height="90" CornerRadius="45"
+                        HorizontalAlignment="Center" Margin="0,0,0,15">
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                            <GradientStop Color="#1976D2" Offset="0"/>
+                            <GradientStop Color="#0D47A1" Offset="1"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <TextBlock Text="🎓" FontSize="42"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Border>
+
+                <TextBlock Text="CLB &amp; EVENT"
+                           FontSize="26" FontWeight="Bold"
+                           Foreground="White" HorizontalAlignment="Center"/>
+
+                <TextBlock Text="HỆ THỐNG QUẢN LÝ"
+                           FontSize="13" Foreground="#90CAF9"
+                           HorizontalAlignment="Center" Margin="0,4,0,20"/>
+
+                <Rectangle Height="2" Width="200" Fill="#42A5F5"
+                           HorizontalAlignment="Center" Opacity="0.6" Margin="0,0,0,20"/>
+
+                <!-- Danh sách tính năng -->
+                <StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8">
+                        <TextBlock Text="✓" Foreground="#42A5F5" FontSize="14" Width="20"/>
+                        <TextBlock Text="Quản lý thông tin CLB &amp; Sự kiện"
+                                   Foreground="#E3F2FD" FontSize="13"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8">
+                        <TextBlock Text="✓" Foreground="#42A5F5" FontSize="14" Width="20"/>
+                        <TextBlock Text="Đăng ký tham gia sự kiện dễ dàng"
+                                   Foreground="#E3F2FD" FontSize="13"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8">
+                        <TextBlock Text="✓" Foreground="#42A5F5" FontSize="14" Width="20"/>
+                        <TextBlock Text="Xem lịch sự kiện theo thời gian"
+                                   Foreground="#E3F2FD" FontSize="13"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" Margin="0,8">
+                        <TextBlock Text="✓" Foreground="#42A5F5" FontSize="14" Width="20"/>
+                        <TextBlock Text="Bảo mật bằng mã hóa SHA-256"
+                                   Foreground="#E3F2FD" FontSize="13"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <Rectangle Height="1" Width="300" Fill="White"
+                           HorizontalAlignment="Center" Opacity="0.2" Margin="0,30,0,15"/>
+
+                <TextBlock Text="© 2026 - Hệ Thống Quản Lý CLB &amp; Sự Kiện"
+                           Foreground="#78909C" FontSize="11"
+                           HorizontalAlignment="Center" TextWrapping="Wrap"
+                           TextAlignment="Center"/>
+            </StackPanel>
+        </Border>
+
+        <!-- ===== CỘT PHẢI: FORM ĐĂNG NHẬP ===== -->
+        <Border Grid.Column="1" Background="#F5F7FF">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <StackPanel VerticalAlignment="Center" Margin="50,40">
+
+                    <!-- Tiêu đề -->
+                    <TextBlock Text="Chào mừng trở lại!"
+                               FontSize="24" FontWeight="Bold"
+                               Foreground="#0D3B8C" Margin="0,0,0,6"/>
+                    <TextBlock Text="Đăng nhập vào tài khoản của bạn"
+                               FontSize="13" Foreground="#607D8B" Margin="0,0,0,30"/>
+
+                    <!-- Thông báo lỗi -->
+                    <Border x:Name="borderThongBaoLoi" Background="#FFEBEE"
+                            CornerRadius="8" Padding="15,10" Margin="0,0,0,15"
+                            Visibility="Collapsed">
+                        <TextBlock x:Name="tbThongBaoLoi" Text=""
+                                   Foreground="#C62828" FontSize="13"
+                                   TextWrapping="Wrap"/>
+                    </Border>
+
+                    <!-- Tên đăng nhập -->
+                    <TextBlock Text="Tên đăng nhập" FontSize="13" FontWeight="SemiBold"
+                               Foreground="#37474F" Margin="0,0,0,6"/>
+                    <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                            Background="White" Margin="0,0,0,20">
+                        <TextBox x:Name="tbTenDangNhap"
+                                 BorderThickness="0" Padding="12,10"
+                                 FontSize="14" Background="Transparent"
+                                 VerticalAlignment="Center"/>
+                    </Border>
+
+                    <!-- Mật khẩu -->
+                    <TextBlock Text="Mật khẩu" FontSize="13" FontWeight="SemiBold"
+                               Foreground="#37474F" Margin="0,0,0,6"/>
+                    <Border BorderBrush="#B0BEC5" BorderThickness="1.5" CornerRadius="8"
+                            Background="White" Margin="0,0,0,25">
+                        <PasswordBox x:Name="pbMatKhau"
+                                     BorderThickness="0" Padding="12,10"
+                                     FontSize="14" Background="Transparent"
+                                     VerticalAlignment="Center"
+                                     PasswordChar="●"
+                                     KeyDown="PbMatKhau_KeyDown"/>
+                    </Border>
+
+                    <!-- Nút Đăng Nhập -->
+                    <Button x:Name="nutDangNhap"
+                            Content="ĐĂNG NHẬP"
+                            Height="46" FontSize="15" FontWeight="Bold"
+                            Foreground="White" BorderThickness="0"
+                            Cursor="Hand" Margin="0,0,0,20"
+                            Click="NutDangNhap_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="vienNut" CornerRadius="10">
+                                    <Border.Background>
+                                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                            <GradientStop Color="#1565C0" Offset="0"/>
+                                            <GradientStop Color="#1976D2" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="vienNut" Property="Background" Value="#0D47A1"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="vienNut" Property="Opacity" Value="0.85"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Đường phân cách -->
+                    <Grid Margin="0,5,0,20">
+                        <Rectangle Height="1" Fill="#CFD8DC" VerticalAlignment="Center"/>
+                        <TextBlock Text=" hoặc " Background="#F5F7FF"
+                                   Foreground="#90A4AE" FontSize="13"
+                                   HorizontalAlignment="Center" Padding="10,0"/>
+                    </Grid>
+
+                    <!-- Nút chuyển sang Đăng Ký -->
+                    <Button x:Name="nutChuyenDangKy"
+                            Content="Chưa có tài khoản? Đăng ký ngay"
+                            Height="46" FontSize="14"
+                            Cursor="Hand" Click="NutChuyenDangKy_Click">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="vienNut" CornerRadius="10"
+                                        BorderBrush="#1565C0" BorderThickness="1.5"
+                                        Background="White">
+                                    <TextBlock Text="Chưa có tài khoản? Đăng ký ngay"
+                                               Foreground="#1565C0" FontSize="14"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="vienNut" Property="Background" Value="#E3F2FD"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+
+                    <!-- Tài khoản demo -->
+                    <Border Background="#E8F5E9" CornerRadius="6" Padding="12,10" Margin="0,20,0,0">
+                        <StackPanel>
+                            <TextBlock Text="💡 Tài khoản thử nghiệm:" FontSize="12"
+                                       Foreground="#2E7D32" FontWeight="SemiBold"/>
+                            <TextBlock Text="Admin: admin / Admin@123" FontSize="11" Foreground="#388E3C"/>
+                            <TextBlock Text="Sinh viên: binghan / SinhVien@123" FontSize="11" Foreground="#388E3C"/>
+                            <TextBlock Text="Quản lý CLB: tuanclb / QuanLy@123" FontSize="11" Foreground="#388E3C"/>
+                        </StackPanel>
+                    </Border>
+
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</Window>

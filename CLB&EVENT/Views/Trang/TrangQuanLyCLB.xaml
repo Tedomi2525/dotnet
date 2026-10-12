@@ -1,0 +1,360 @@
+<UserControl x:Class="CLB_EVENT.TrangQuanLyCLB"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Grid Background="#F0F2F5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- TIÊU ĐỀ VÀ CÔNG CỤ -->
+        <Border Grid.Row="0" Background="White" Padding="25,15">
+            <Border.Effect>
+                <DropShadowEffect Color="Gray" BlurRadius="4" ShadowDepth="1" Opacity="0.1" Direction="270"/>
+            </Border.Effect>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0">
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+                        <TextBlock Text="🏛️" FontSize="20" VerticalAlignment="Center" Margin="0,0,8,0"/>
+                        <TextBlock Text="Quản Lý Câu Lạc Bộ" FontSize="18" FontWeight="Bold"
+                                   Foreground="#212121" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <!-- Thanh tìm kiếm -->
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="100"/>
+                        </Grid.ColumnDefinitions>
+                        <Border Grid.Column="0" BorderBrush="#E0E0E0" BorderThickness="1"
+                                CornerRadius="6" Background="#F9F9F9" Margin="0,0,10,0">
+                            <StackPanel Orientation="Horizontal" Margin="12,8">
+                                <TextBlock Text="🔍 " Foreground="#757575" FontSize="13"/>
+                                <TextBox x:Name="tbTimKiem" BorderThickness="0"
+                                         Background="Transparent" FontSize="13"
+                                         Width="250" VerticalAlignment="Center"
+                                         TextChanged="TbTimKiem_TextChanged"/>
+                            </StackPanel>
+                        </Border>
+                        <Button Grid.Column="1" Content="🔍 Tìm"
+                                Background="#1565C0" Foreground="White"
+                                BorderThickness="0" FontSize="13"
+                                Cursor="Hand" Click="NutTimKiem_Click">
+                            <Button.Template>
+                                <ControlTemplate TargetType="Button">
+                                    <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#0D47A1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Button.Template>
+                        </Button>
+                    </Grid>
+                </StackPanel>
+
+                <!-- Nút thêm CLB mới (chỉ Admin thấy) -->
+                <Button Grid.Column="1" x:Name="nutThemCLB"
+                        Content="➕ THÊM CLB MỚI"
+                        Height="42" MinWidth="165" Margin="12,0,0,0" Padding="20,0"
+                        FontSize="13" FontWeight="Bold"
+                        Foreground="White" BorderThickness="0"
+                        Cursor="Hand" VerticalAlignment="Bottom"
+                        Click="NutThemCLB_Click">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="vienNut" CornerRadius="8">
+                                <Border.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#2E7D32" Offset="0"/>
+                                        <GradientStop Color="#43A047" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="vienNut" Property="Background" Value="#1B5E20"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </Border>
+
+        <!-- NỘI DUNG CHÍNH -->
+        <Grid Grid.Row="1" Margin="25,15,25,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="20"/>
+                <ColumnDefinition Width="400"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- CỘT TRÁI: Danh sách CLB -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Tiêu đề danh sách -->
+                <Border Grid.Row="0" Background="White" CornerRadius="10,10,0,0" Padding="18,12">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Orientation="Horizontal">
+                            <Border Width="4" Height="18" CornerRadius="2"
+                                    Background="#1565C0" Margin="0,0,10,0"/>
+                            <TextBlock Text="DANH SÁCH CÂU LẠC BỘ"
+                                       FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                        </StackPanel>
+                        <TextBlock Grid.Column="1" x:Name="tbSoCLB"
+                                   Text="0 CLB" FontSize="12"
+                                   Foreground="#757575" VerticalAlignment="Center"/>
+                    </Grid>
+                </Border>
+
+                <!-- Danh sách CLB -->
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="panelDanhSachCLB">
+                    </StackPanel>
+                </ScrollViewer>
+            </Grid>
+
+            <!-- CỘT PHẢI: Chi tiết và form CLB -->
+            <StackPanel Grid.Column="2">
+
+                <!-- Panel chi tiết CLB khi chọn -->
+                <Border x:Name="borderChiTietCLB" Background="White"
+                        CornerRadius="10" Margin="0,0,0,15"
+                        Visibility="Collapsed">
+                    <StackPanel>
+                        <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="4" Height="18" CornerRadius="2"
+                                        Background="#1565C0" Margin="0,0,10,0"/>
+                                <TextBlock Text="THÔNG TIN CHI TIẾT CLB"
+                                           FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Padding="18,15">
+                        <StackPanel>
+                            <TextBlock x:Name="tbTenCLBChiTiet" Text=""
+                                       FontSize="16" FontWeight="Bold"
+                                       Foreground="#1565C0" Margin="0,0,0,12"/>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="📝 Mô tả:" FontSize="12"
+                                           Foreground="#757575" VerticalAlignment="Top"/>
+                                <TextBlock Grid.Column="1" x:Name="tbMoTaCLB" Text=""
+                                           FontSize="12" Foreground="#424242"
+                                           TextWrapping="Wrap"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="👨‍💼 Chủ nhiệm:" FontSize="12" Foreground="#757575"/>
+                                <TextBlock Grid.Column="1" x:Name="tbChuNhiem" Text=""
+                                           FontSize="12" Foreground="#424242"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="📅 Ngày thành lập:" FontSize="12" Foreground="#757575"/>
+                                <TextBlock Grid.Column="1" x:Name="tbNgayThanhLap" Text=""
+                                           FontSize="12" Foreground="#424242"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,15">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="👥 Số thành viên:" FontSize="12" Foreground="#757575"/>
+                                <TextBlock Grid.Column="1" x:Name="tbSoThanhVien" Text=""
+                                           FontSize="12" Foreground="#424242"/>
+                            </Grid>
+
+                            <!-- Nút chỉnh sửa và xóa -->
+                            <StackPanel Orientation="Horizontal" x:Name="panelNutQuanLy"
+                                        Visibility="Collapsed">
+                                <Button x:Name="nutSuaCLB"
+                                        Content="✏️ Chỉnh sửa"
+                                        Height="36" Padding="15,0"
+                                        Background="#F57C00" Foreground="White"
+                                        BorderThickness="0" FontSize="12"
+                                        Cursor="Hand" Margin="0,0,10,0"
+                                        Click="NutSuaCLB_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <Button x:Name="nutXoaCLB"
+                                        Content="🗑️ Xóa CLB"
+                                        Height="36" Padding="15,0"
+                                        Background="#E53935" Foreground="White"
+                                        BorderThickness="0" FontSize="12"
+                                        Cursor="Hand"
+                                        Click="NutXoaCLB_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="6" Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+                <!-- Form thêm/sửa CLB -->
+                <Border x:Name="borderFormCLB" Background="White"
+                        CornerRadius="10" Visibility="Collapsed">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="500">
+                    <StackPanel>
+                        <Border BorderBrush="#E0E0E0" BorderThickness="0,0,0,1" Padding="18,14">
+                            <StackPanel Orientation="Horizontal">
+                                <Border Width="4" Height="18" CornerRadius="2"
+                                        Background="#2E7D32" Margin="0,0,10,0"/>
+                                <TextBlock x:Name="tbTieuDeForm" Text="THÊM CLB MỚI"
+                                           FontWeight="Bold" FontSize="13" Foreground="#212121"/>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Padding="18,15">
+                        <StackPanel>
+                            <!-- Thông báo -->
+                            <Border x:Name="borderThongBaoForm" CornerRadius="6"
+                                    Padding="12,8" Margin="0,0,0,12" Visibility="Collapsed">
+                                <TextBlock x:Name="tbThongBaoForm" FontSize="12" TextWrapping="Wrap"/>
+                            </Border>
+
+                            <!-- Tên CLB -->
+                            <TextBlock Text="Tên CLB *" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6"
+                                    Background="White" Margin="0,0,0,12">
+                                <TextBox x:Name="tbTenCLBForm" BorderThickness="0"
+                                         Padding="10,8" FontSize="13"/>
+                            </Border>
+
+                            <!-- Mô tả -->
+                            <TextBlock Text="Mô tả CLB" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6"
+                                    Background="White" Margin="0,0,0,12">
+                                <TextBox x:Name="tbMoTaForm" BorderThickness="0"
+                                         Padding="10,8" FontSize="13"
+                                         Height="70" TextWrapping="Wrap"
+                                         AcceptsReturn="True"/>
+                            </Border>
+
+                            <!-- Chủ nhiệm CLB -->
+                            <TextBlock Text="Chủ nhiệm CLB" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6"
+                                    Background="White" Margin="0,0,0,12">
+                                <TextBox x:Name="tbChuNhiemForm" BorderThickness="0"
+                                         Padding="10,8" FontSize="13"/>
+                            </Border>
+
+                            <!-- Liên hệ -->
+                            <TextBlock Text="Email CLB" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <Border BorderBrush="#E0E0E0" BorderThickness="1" CornerRadius="6"
+                                    Background="White" Margin="0,0,0,15">
+                                <TextBox x:Name="tbLienHeForm" BorderThickness="0"
+                                         Padding="10,8" FontSize="13"/>
+                            </Border>
+
+                            <TextBlock Text="Số điện thoại CLB" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <TextBox x:Name="tbSDTForm" Padding="10,8" Margin="0,0,0,12"/>
+                            <TextBlock Text="Tài khoản quản lý CLB" FontSize="12" Foreground="#616161" Margin="0,0,0,5"/>
+                            <ComboBox x:Name="cbQuanLyForm" DisplayMemberPath="HoTen" SelectedValuePath="MaNguoiDung"
+                                      Padding="10,8" Margin="0,0,0,15"/>
+
+                            <!-- Nút lưu và hủy -->
+                            <StackPanel Orientation="Horizontal">
+                                <Button x:Name="nutLuuCLB"
+                                        Content="💾 Lưu"
+                                        Height="38" Padding="20,0"
+                                        Foreground="White" BorderThickness="0"
+                                        FontSize="13" Cursor="Hand"
+                                        Margin="0,0,10,0"
+                                        Click="NutLuuCLB_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="6" Background="#1565C0">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+
+                                <Button x:Name="nutHuyForm"
+                                        Content="✖ Hủy"
+                                        Height="38" Padding="20,0"
+                                        Background="#F5F5F5" Foreground="#616161"
+                                        BorderBrush="#E0E0E0" BorderThickness="1"
+                                        FontSize="13" Cursor="Hand"
+                                        Click="NutHuyForm_Click">
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="Button">
+                                            <Border CornerRadius="6" Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Button.Template>
+                                </Button>
+                            </StackPanel>
+                        </StackPanel>
+                    </Border>
+                    </StackPanel>
+                    </ScrollViewer>
+                </Border>
+
+                <!-- Hướng dẫn khi chưa chọn gì -->
+                <Border x:Name="borderHuongDan" Background="White" CornerRadius="10" Padding="20,40">
+                    <StackPanel>
+                        <TextBlock Text="👆" FontSize="40" HorizontalAlignment="Center"/>
+                        <TextBlock Text="Chọn một CLB bên trái để xem chi tiết hoặc nhấn 'Thêm CLB Mới'"
+                                   FontSize="13" Foreground="#9E9E9E"
+                                   HorizontalAlignment="Center"
+                                   TextAlignment="Center"
+                                   TextWrapping="Wrap"
+                                   Margin="0,10,0,0"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

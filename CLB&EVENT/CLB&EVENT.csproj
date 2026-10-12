@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{17EAA978-BDC0-4627-B55E-0025CF7AAC34}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>CLB_EVENT</RootNamespace>
+    <AssemblyName>ClubEventManager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- File định nghĩa ứng dụng -->
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+
+    <!-- MainWindow (giữ nguyên nhưng không dùng làm StartupUri) -->
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+
+    <!-- Màn hình đăng nhập -->
+    <Page Include="Views\CuaSoDangNhap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+
+    <!-- Màn hình đăng ký tài khoản -->
+    <Page Include="Views\CuaSoDangKy.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+
+    <!-- Cửa sổ chính với sidebar điều hướng -->
+    <Page Include="Views\CuaSoChinh.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+
+    <!-- Các trang nội dung (UserControl) -->
+    <Page Include="Views\Trang\TrangChu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trang\TrangTinTuc.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trang\TrangDangKySuKien.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trang\TrangThoiGianSuKien.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trang\TrangQuanLyCLB.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Trang\TrangDangKyCLBForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Code-behind cho App.xaml -->
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+
+    <!-- Code-behind cho MainWindow.xaml -->
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+
+    <!-- Code-behind cho các Views -->
+    <Compile Include="Views\CuaSoDangNhap.xaml.cs">
+      <DependentUpon>CuaSoDangNhap.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\CuaSoDangKy.xaml.cs">
+      <DependentUpon>CuaSoDangKy.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\CuaSoChinh.xaml.cs">
+      <DependentUpon>CuaSoChinh.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+
+    <!-- Code-behind cho các trang -->
+    <Compile Include="Views\Trang\TrangChu.xaml.cs">
+      <DependentUpon>TrangChu.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Trang\TrangTinTuc.xaml.cs">
+      <DependentUpon>TrangTinTuc.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Trang\TrangDangKySuKien.xaml.cs">
+      <DependentUpon>TrangDangKySuKien.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Trang\TrangThoiGianSuKien.xaml.cs">
+      <DependentUpon>TrangThoiGianSuKien.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Trang\TrangQuanLyCLB.xaml.cs">
+      <DependentUpon>TrangQuanLyCLB.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Views\Trang\TrangDangKyCLBForm.xaml.cs">
+      <DependentUpon>TrangDangKyCLBForm.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+
+    <!-- Models (lớp dữ liệu) -->
+    <Compile Include="Models\CauLacBo.cs" />
+    <Compile Include="Models\DangKyCLB.cs" />
+    <Compile Include="Models\DangKySuKien.cs" />
+    <Compile Include="Models\NguoiDung.cs" />
+    <Compile Include="Models\SuKien.cs" />
+    <Compile Include="Models\TinTuc.cs" />
+
+    <!-- Services (lớp dịch vụ xử lý logic) -->
+    <Compile Include="Services\DichVuCLB.cs" />
+    <Compile Include="Services\DichVuMaHoa.cs" />
+    <Compile Include="Services\DichVuNguoiDung.cs" />
+    <Compile Include="Services\DichVuSuKien.cs" />
+    <Compile Include="Services\DichVuTinTuc.cs" />
+    <Compile Include="Services\DichVuPhanQuyen.cs" />
+    <Compile Include="DuLieu\KhoDuLieuAiven.cs" />
+    <Compile Include="DuLieu\CauHinhAiven.cs" />
+    <Compile Include="Views\Trang\TrangQuanLyNghiepVu.cs" />
+
+    <!-- Utilities (tiện ích dùng chung) -->
+    <Compile Include="Utilities\LenhChay.cs" />
+    <Compile Include="Utilities\ViewModelCoSo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <Content Include="ca.pem"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="aiven.local.secret" Condition="Exists('aiven.local.secret')"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <PackageReference Include="MySqlConnector" Version="2.6.2" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
